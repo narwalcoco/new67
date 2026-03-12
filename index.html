@@ -170,7 +170,7 @@ function launch() {
 <!DOCTYPE html>
 <html>
 <head>
-<title>SF</title>
+<title>New Tab</title>
 <style>
 html,body{margin:0;height:100%;overflow:hidden;background:black;}
 iframe{border:none;width:100%;height:100%;}
@@ -184,11 +184,22 @@ iframe{border:none;width:100%;height:100%;}
   win.document.close();
 
   setTimeout(() => {
-  if (window.top !== window) {
-    window.top.location.replace("about:blank");
-  } else {
-    window.location.replace("about:blank");
-  }
+
+  // Try to close the tab first
+  window.open('', '_self');
+  window.close();
+
+  // If the browser blocks it, fall back to about:blank
+  setTimeout(() => {
+    if (!window.closed) {
+      if (window.top !== window) {
+        window.top.location.replace("about:blank");
+      } else {
+        window.location.replace("about:blank");
+      }
+    }
+  }, 100);
+
 }, 200);
 
 }

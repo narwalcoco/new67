@@ -183,11 +183,14 @@ iframe{border:none;width:100%;height:100%;}
 `);
   win.document.close();
 
+  setTimeout(() => {
   if (window.top !== window) {
     window.top.location.replace("about:blank");
   } else {
     window.location.replace("about:blank");
   }
+}, 200);
+
 }
 
 /* COPY */
